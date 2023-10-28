@@ -131,3 +131,6 @@ dist
 
 #VSCode
 .vscode/
+
+#db.js
+/server/config/db.js
