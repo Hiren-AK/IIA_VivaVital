@@ -1,10 +1,11 @@
 import React from 'react';
+import UserInputForm from './UserInputForm';
 
 function Home() {
   return (
-    <div>
-      <h1>Welcome to VivaVital</h1>
-      <p>Your health and nutrition tracker</p>
+    <div className="Home">
+      <h1>User Input</h1>
+      <UserInputForm />
     </div>
   );
 }
