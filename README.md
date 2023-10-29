@@ -66,7 +66,7 @@ Follow these steps to set up the project locally.
 - Create a `.env` file in the `server` directory and add your environment variables:
 
   ```env
-  PORT=5000
+  PORT=8001
   DB_HOST=localhost
   DB_USER=vivavitaluser
   DB_PASSWORD=yourpassword
