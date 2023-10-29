@@ -1,19 +1,13 @@
-import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
 
 dotenv.config();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  database: process.env.DB_NAME
 });
 
 connection.connect(err => {
@@ -22,12 +16,22 @@ connection.connect(err => {
     return;
   }
   console.log('Connected to the database');
+
+  const query = `SHOW TABLES`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Failed to retrieve tables:', err);
+      return;
+    }
+
+    console.log('Tables in the database:');
+    results.forEach(result => {
+      console.log(result);
+    });
+
+    connection.end();
+  });
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
-});
+
