@@ -50,16 +50,17 @@ Follow these steps to set up the project locally.
 
 4. **Configure MySQL Database**
 
-    Create a new MySQL database and user, and grant the necessary permissions:
-
-    ```sql
-    CREATE DATABASE vivavital;
-    CREATE USER 'vivavitaluser'@'localhost' IDENTIFIED BY 'yourpassword';
-    GRANT ALL PRIVILEGES ON vivavital.* TO 'vivavitaluser'@'localhost';
-    FLUSH PRIVILEGES;
+    Update the database configuration in the server application (.env) and etl_script.py to match your MySQL setup.
+    Ensure you have the required libraries installed (pymysql, pandas, openpyxl) and replace "your_password" with your actual MySQL root password.
+    Run the etl_script.py ONLY ONCE IN THE START.
+    ```python3
+    pip install pymysql, pandas, openpyxl
+    python3 etl_script.py
     ```
-
-    Update the database configuration in the server application to match your MySQL setup.
+    To check if it ran:
+    ```node
+    node listTables.js
+    ```
 
 ### Configuration
 
@@ -70,7 +71,7 @@ Follow these steps to set up the project locally.
   DB_HOST=localhost
   DB_USER=vivavitaluser
   DB_PASSWORD=yourpassword
-  DB_DATABASE=vivavital
+  DB_NAME=VivaVital
   ````
 
 ### Running the Application
