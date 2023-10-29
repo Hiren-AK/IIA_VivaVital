@@ -6,7 +6,7 @@ import numpy as np
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "p@sswOrd123",
+    "password": "your_password",
     "database": "VivaVital"
 }
 
