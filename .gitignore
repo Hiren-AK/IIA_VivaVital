@@ -134,3 +134,6 @@ dist
 
 #db.js
 /server/config/db.js
+
+#ETL script
+etl_script.py
