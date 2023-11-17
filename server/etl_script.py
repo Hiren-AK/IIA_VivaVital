@@ -23,6 +23,18 @@ def create_tables(connection):
     """Creates the necessary tables in the database."""
     try:
         with connection.cursor() as cursor:
+            # Create User table
+            # cursor.execute("""
+            #     CREATE TABLE IF NOT EXISTS Users (
+            #         UserID INT AUTO_INCREMENT PRIMARY KEY,
+            #         Username VARCHAR(50) UNIQUE NOT NULL,
+            #         Email VARCHAR(100) UNIQUE NOT NULL,
+            #         PasswordHash VARCHAR(255) NOT NULL,
+            #         CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            #         UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            #     );
+            # """)
+
             # Create Nutritional Information table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS Nutritional_Information (
