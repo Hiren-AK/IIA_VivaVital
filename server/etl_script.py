@@ -1,14 +1,21 @@
+import os
 import pymysql
 import pandas as pd
 import numpy as np
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Database credentials
 db_config = {
-    "host": "localhost",
-    "user": "root",
-    "password": "passwordgtgdjg",
-    "database": "VivaVital"
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME")
 }
+
+print(db_config)
 
 def create_connection():
     """Creates and returns a database connection."""
@@ -24,16 +31,16 @@ def create_tables(connection):
     try:
         with connection.cursor() as cursor:
             # Create User table
-            # cursor.execute("""
-            #     CREATE TABLE IF NOT EXISTS Users (
-            #         UserID INT AUTO_INCREMENT PRIMARY KEY,
-            #         Username VARCHAR(50) UNIQUE NOT NULL,
-            #         Email VARCHAR(100) UNIQUE NOT NULL,
-            #         PasswordHash VARCHAR(255) NOT NULL,
-            #         CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            #         UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            #     );
-            # """)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Users (
+                    UserID INT AUTO_INCREMENT PRIMARY KEY,
+                    Username VARCHAR(50) UNIQUE NOT NULL,
+                    Email VARCHAR(100) UNIQUE NOT NULL,
+                    PasswordHash VARCHAR(255) NOT NULL,
+                    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                );
+            """)
 
             # Create Nutritional Information table
             cursor.execute("""
