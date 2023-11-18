@@ -132,8 +132,5 @@ dist
 #VSCode
 .vscode/
 
-#db.js
-/server/config/db.js
-
-#ETL script
-etl_script.py
+#final.env
+./server/final.env
