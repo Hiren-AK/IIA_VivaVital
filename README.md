@@ -46,7 +46,7 @@ Follow these steps to set up the project locally.
     npm start
     ```
 
-    The application should now be running on `http://localhost:3000`.
+    The application should now be running on `http://localhost:8001`.
 
 4. **Configure MySQL Database**
 
@@ -96,4 +96,4 @@ Follow these steps:
     npm start
     ```
 
-3. **Navigate to http://localhost:3000 in your browser to view and interact with the application.**
+3. **Navigate to http://localhost:80001 in your browser to view and interact with the application.**
