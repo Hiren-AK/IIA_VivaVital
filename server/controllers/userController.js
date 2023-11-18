@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import db from '../config/db.js';
+import db from '../db.js';
 
 const validateEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

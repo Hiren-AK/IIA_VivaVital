@@ -19,11 +19,11 @@ const getIPAddress = () => {
 const ip = getIPAddress();
 const envConfig = `REACT_APP_API_URL=http://${ip}:8001
 PORT=8001
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=p@sswOrd123
-DB_NAME=VivaVital
+VV_HOST=localhost
+VV_USER=root
+VV_PASSWORD=p@sswOrd123
+VV_NAME=VivaVital
 \n`;
 
-fs.writeFileSync('.env', envConfig);
+fs.writeFileSync('final.env', envConfig);
 console.log('Environment variables set:', envConfig);

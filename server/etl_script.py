@@ -5,17 +5,15 @@ import numpy as np
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv('./final.env')
 
 # Database credentials
 db_config = {
-    "host": os.getenv("DB_HOST"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "database": os.getenv("DB_NAME")
+    "host": os.getenv("VV_HOST"),
+    "user": os.getenv("VV_USER"),
+    "password": os.getenv("VV_PASSWORD"),
+    "database": os.getenv("VV_NAME")
 }
-
-print(db_config)
 
 def create_connection():
     """Creates and returns a database connection."""
