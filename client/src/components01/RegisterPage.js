@@ -61,7 +61,7 @@ function RegisterPage() {
     }
   
     try {
-      const response = await axios.post('http://localhost:3000/register', {
+      const response = await axios.post('http://localhost:8001/register', {
         username: userData.username,
         email: userData.email,
         password: userData.password
@@ -111,11 +111,9 @@ function RegisterPage() {
         />
         {userData.errors.password && <div className="error">{userData.errors.password}</div>}
         <br />
-        <>
-        {userData.errors.backend && <div className="error">{userData.errors.backend}</div>}
-        </>
         <button type="submit">Register</button>
       </form>
+      {userData.errors.backend && <div className="error">{userData.errors.backend}</div>}{/* Display error here */}
     </div>
   );
 }

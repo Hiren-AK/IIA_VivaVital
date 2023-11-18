@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
   }
 
   if (!validateEmail(email)) {
-    return res.status(400).send('Invalid email format');
+    return res.status(400).send('Invalid email format. Please provide a valid email address');
   }
 
   if (password.length < 8) {
@@ -29,7 +29,7 @@ const registerUser = async (req, res) => {
     db.execute(query, [username, email, hashedPassword], (err, result) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
-          return res.status(409).send('Email already in use');
+          return res.status(409).send('Email already in use. Please choose another email');
         }
         return res.status(500).send('Error registering new user');
       }
