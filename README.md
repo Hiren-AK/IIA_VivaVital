@@ -50,29 +50,8 @@ Follow these steps to set up the project locally.
 
 4. **Configure MySQL Database**
 
-    Update the database configuration in the server application (.env) and etl_script.py to match your MySQL setup.
+    Update the database configuration in the server application (final.env) according to your mysql local, make a database and put the name of it in place of VivaVital in the file.
     Ensure you have the required libraries installed (pymysql, pandas, openpyxl) and replace "your_password" with your actual MySQL root password.
-    Run the etl_script.py ONLY ONCE IN THE START.
-    ```python3
-    pip install pymysql, pandas, openpyxl
-    python3 etl_script.py
-    ```
-    To check if it ran:
-    ```node
-    node listTables.js
-    ```
-
-### Configuration
-
-- Create a `.env` file in the `server` directory and add your environment variables:
-
-  ```env
-  PORT=8001
-  DB_HOST=localhost
-  DB_USER=vivavitaluser
-  DB_PASSWORD=yourpassword
-  DB_NAME=VivaVital
-  ````
 
 ### Running the Application
 
