@@ -40,6 +40,47 @@ def create_tables(connection):
                 );
             """)
 
+            # Create Health Metrics Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Health_Metrics (
+                    MetricID INT AUTO_INCREMENT PRIMARY KEY,
+                    UserID INT,
+                    Date DATE,
+                    HeartRate INT,
+                    Steps INT,
+                    SleepDuration DOUBLE,
+                    OtherMetrics TEXT,
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                );
+            """)
+
+            # Create Dietary Information Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Dietary_Information (
+                    EntryID INT AUTO_INCREMENT PRIMARY KEY,
+                    UserID INT,
+                    Date DATE,
+                    MealType VARCHAR(50),
+                    FoodItem VARCHAR(255),
+                    Calories DOUBLE,
+                    Nutrients TEXT,
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                );
+            """)
+
+            # Create Wearable Data Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Wearable_Data (
+                    DataID INT AUTO_INCREMENT PRIMARY KEY,
+                    UserID INT,
+                    DeviceID VARCHAR(100),
+                    Timestamp TIMESTAMP,
+                    DataType VARCHAR(50),
+                    Value DOUBLE,
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                );
+            """)
+
             # Create Nutritional Information table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS Nutritional_Information (
