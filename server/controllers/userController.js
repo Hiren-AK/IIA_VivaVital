@@ -36,9 +36,31 @@ const registerUser = async (req, res) => {
         console.error('Server error:', err.message); // Log detailed error message
         res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
       }
-      res.status(201).send('User registered successfully');
-    });
-  } catch (err) {
+    }
+    )} catch (err) {
+      console.error('Server error:', err.message); // Log detailed error message
+      res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+    }
+    try{
+      const query2 = 'SELECT UserID, PasswordHash FROM Users WHERE Email = ?';
+      let user;
+      const [users] = await db.execute(query2, [email]);
+      if (users.length === 0) {
+        return res.status(401).send('Could not retreive UserID');
+      }
+      user = users[0];
+      try {
+        const isMatch = await bcrypt.compare(password, user.PasswordHash);
+        if (!isMatch) {
+          return res.status(401).send('Something went wrong in the backend');
+        }
+        res.status(200).send('User logged in successfully');
+      } catch (err) {
+        console.error('Server error:', err.message); // Log detailed error message
+        res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+      }
+      res.status(201).json({ message: 'User registered successfully', userId: user.userId });
+    } catch (err) {
     console.error('Server error:', err.message); // Log detailed error message
     res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
   }
@@ -67,7 +89,7 @@ const loginUser = async (req, res) => {
       if (!isMatch) {
         return res.status(401).send('Invalid email or password');
       }
-      res.status(200).send('User logged in successfully');
+      res.status(200).json({ message: 'User registered successfully', userId: user.userId });
     } catch (err) {
       console.error('Server error:', err.message); // Log detailed error message
       res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging

@@ -28,7 +28,12 @@ function LoginPage() {
         email: loginData.email,
         password: loginData.password
       });
-      setUser({ userID: response.data.userID });
+      const userID = response.data.userId;
+
+      // Access and use the data from the server response
+      console.log('User ID:', userID);
+
+      setUser({ userID: userID });
       // Handle successful login here, like redirecting to another page
     } catch (error) {
       if (error.response) {

@@ -73,7 +73,12 @@ function RegisterPage() {
         email: userData.email,
         password: userData.password
       });
-      setUser({ userID: response.data.userID });
+      const userID = response.data.userId;
+
+      // Access and use the data from the server response
+      console.log('User ID:', userID);
+
+      setUser({ userID: userID });
       navigate('/demographics');
       // Handle success, e.g., redirect to login or show success message
     } catch (error) {
