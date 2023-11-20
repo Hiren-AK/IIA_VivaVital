@@ -50,7 +50,8 @@ def create_tables(connection):
                     Steps INT,
                     SleepDuration DOUBLE,
                     OtherMetrics TEXT,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+                    INDEX (UserID)  -- Adding an index on UserID
                 );
             """)
 
@@ -64,7 +65,8 @@ def create_tables(connection):
                     FoodItem VARCHAR(255),
                     Calories DOUBLE,
                     Nutrients TEXT,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+                    INDEX (UserID)  -- Adding an index on UserID
                 );
             """)
 
@@ -77,7 +79,8 @@ def create_tables(connection):
                     Timestamp TIMESTAMP,
                     DataType VARCHAR(50),
                     Value DOUBLE,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+                    INDEX (UserID)  -- Adding an index on UserID
                 );
             """)
 
