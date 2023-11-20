@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 import '../utils/temp.css';
 
 
 function RegisterPage() {
   // State to store input values
+  const { setUser } = useContext(UserContext);
+
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -69,7 +73,7 @@ function RegisterPage() {
         email: userData.email,
         password: userData.password
       });
-      localStorage.setItem('token', response.data.token); // Store the token
+      setUser({ userID: response.data.userID });
       navigate('/demographics');
       // Handle success, e.g., redirect to login or show success message
     } catch (error) {
@@ -118,7 +122,7 @@ function RegisterPage() {
         <br />
         <button type="submit">Register</button>
       </form>
-      {userData.errors.backend && <div className="error">{userData.errors.backend}</div>}{/* Display error here */}
+      {userData.errors.backend && <div className="error">{userData.errors.backend}</div>}
     </div>
   );
 }

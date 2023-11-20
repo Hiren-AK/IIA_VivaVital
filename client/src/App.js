@@ -1,17 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { LandingPage, LoginPage, RegisterPage, DemographicsForm }from './components01';
+import { UserProvider } from './UserContext';
+import LandingPage from './components01/LandingPage';
+import LoginPage from './components01/LoginPage';
+import RegisterPage from './components01/RegisterPage';
+import DemographicsForm from './components02/DemographicsForm';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/demographics" element={<RegisterPage />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/demographics" element={<DemographicsForm />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 

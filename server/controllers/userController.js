@@ -1,12 +1,7 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import db from '../db.js';
+import mysql from 'mysql2/promise';
 
-const JWT_SECRET = process.env.JWT_SECRET; // Ensure this is set in your environment
-
-const createToken = (userId) => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' }); // Customize the expiry
-};
 
 const validateEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,10 +26,9 @@ const registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const token = createToken(email); 
-    const query = 'INSERT INTO Users (Username, Email, PasswordHash, token) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO Users (Username, Email, PasswordHash) VALUES (?, ?, ?)';
     
-    db.execute(query, [username, email, hashedPassword, token], (err, result) => {
+    db.execute(query, [username, email, hashedPassword], (err, result) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           return res.status(409).send('Email already in use. Please choose another email');
@@ -88,9 +82,9 @@ const insertDemographics = async (req, res) => {
     `, [userId, birthdate, gender, weight, height]);
 
     res.status(200).send('Demographic data added successfully');
-  } catch (error) {
-    console.error('Error inserting demographic data:', error);
-    res.status(500).send('Server error');
+  } catch (err) {
+    console.error('Server error:', err.message); // Log detailed error message
+    res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
   }
 };
 

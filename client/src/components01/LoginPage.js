@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 import axios from 'axios';
 import '../utils/temp.css'
 
 function LoginPage() {
+
+  const { setUser } = useContext(UserContext);
+
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
@@ -23,6 +28,7 @@ function LoginPage() {
         email: loginData.email,
         password: loginData.password
       });
+      setUser({ userID: response.data.userID });
       // Handle successful login here, like redirecting to another page
     } catch (error) {
       if (error.response) {
