@@ -137,3 +137,5 @@ final.env
 
 #setEnv.mjs
 setEnv.mjs
+
+initialized.flag
