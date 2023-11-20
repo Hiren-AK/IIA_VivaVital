@@ -93,7 +93,7 @@ def create_tables(connection):
                     Birthdate DATE,
                     Gender VARCHAR(20),
                     Weight FLOAT,
-                     Height DOUBLE,
+                    Height DOUBLE,
                     FOREIGN KEY (UserID) REFERENCES Users(UserID),
                     INDEX (UserID)  -- Adding an index on UserID
                 );

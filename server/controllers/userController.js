@@ -70,4 +70,20 @@ const loginUser = async (req, res) => {
   });
 };
 
-export { registerUser, loginUser };
+const insertDemographics = async (req, res) => {
+  const { userId, birthdate, gender, weight, height } = req.body;
+
+  try {
+    await db.execute(`
+      INSERT INTO Demographics (UserID, Birthdate, Gender, Weight, Height)
+      VALUES (?, ?, ?, ?, ?)
+    `, [userId, birthdate, gender, weight, height]);
+
+    res.status(200).send('Demographic data added successfully');
+  } catch (error) {
+    console.error('Error inserting demographic data:', error);
+    res.status(500).send('Server error');
+  }
+};
+
+export { registerUser, loginUser, insertDemographics };

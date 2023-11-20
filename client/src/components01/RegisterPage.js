@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../utils/temp.css';
 
 
@@ -15,6 +16,8 @@ function RegisterPage() {
       password: ''
     }
   });
+
+  const navigate = useNavigate();
 
   // functions to validate email and password strength:
   const validateEmail = (email) => {
@@ -66,6 +69,7 @@ function RegisterPage() {
         email: userData.email,
         password: userData.password
       });
+      navigate('/demographics');
       // Handle success, e.g., redirect to login or show success message
     } catch (error) {
       if (error.response && error.response.data) {
