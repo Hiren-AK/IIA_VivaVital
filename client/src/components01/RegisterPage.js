@@ -69,6 +69,7 @@ function RegisterPage() {
         email: userData.email,
         password: userData.password
       });
+      localStorage.setItem('token', response.data.token); // Store the token
       navigate('/demographics');
       // Handle success, e.g., redirect to login or show success message
     } catch (error) {
