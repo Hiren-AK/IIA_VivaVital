@@ -33,12 +33,14 @@ const registerUser = async (req, res) => {
         if (err.code === 'ER_DUP_ENTRY') {
           return res.status(409).send('Email already in use. Please choose another email');
         }
-        return res.status(500).send('Error registering new user');
+        console.error('Server error:', err.message); // Log detailed error message
+        res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
       }
       res.status(201).send('User registered successfully');
     });
   } catch (err) {
-    res.status(500).send('Server error');
+    console.error('Server error:', err.message); // Log detailed error message
+    res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
   }
 };
 
@@ -67,7 +69,8 @@ const loginUser = async (req, res) => {
       }
       res.status(200).send('User logged in successfully');
     } catch (err) {
-      res.status(500).send('Server error');
+      console.error('Server error:', err.message); // Log detailed error message
+      res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
     }
   });
 };

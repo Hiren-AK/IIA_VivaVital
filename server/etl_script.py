@@ -35,7 +35,6 @@ def create_tables(connection):
                     Username VARCHAR(50) UNIQUE NOT NULL,
                     Email VARCHAR(100) UNIQUE NOT NULL,
                     PasswordHash VARCHAR(255) NOT NULL,
-                    Token VARCHAR(255) NOT NULL,
                     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 );
