@@ -85,6 +85,20 @@ def create_tables(connection):
                 );
             """)
 
+            # Create User Demograohics Table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Demographics (
+                    DemoID INT AUTO_INCREMENT PRIMARY KEY,
+                    UserID INT,
+                    Birthdate DATE,
+                    Gender VARCHAR(20),
+                    Weight FLOAT,
+                     Height DOUBLE,
+                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+                    INDEX (UserID)  -- Adding an index on UserID
+                );
+            """)
+
             # Create Nutritional Information table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS Nutritional_Information (

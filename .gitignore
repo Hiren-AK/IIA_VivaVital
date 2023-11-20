@@ -133,4 +133,7 @@ dist
 .vscode/
 
 #final.env
-.server/final.env
+final.env
+
+#setEnv.mjs
+setEnv.mjs
