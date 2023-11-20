@@ -24,109 +24,6 @@ def create_connection():
         print(f"Error connecting to database: {e}")
         return None
 
-def create_tables(connection):
-    """Creates the necessary tables in the database."""
-    try:
-        with connection.cursor() as cursor:
-            # Create User table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Users (
-                    UserID INT AUTO_INCREMENT PRIMARY KEY,
-                    Username VARCHAR(50) UNIQUE NOT NULL,
-                    Email VARCHAR(100) UNIQUE NOT NULL,
-                    PasswordHash VARCHAR(255) NOT NULL,
-                    Token VARCHAR(255) NOT NULL,
-                    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                );
-            """)
-
-            # Create Health Metrics Table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Health_Metrics (
-                    MetricID INT AUTO_INCREMENT PRIMARY KEY,
-                    UserID INT,
-                    Date DATE,
-                    HeartRate INT,
-                    Steps INT,
-                    Distance DOUBLE,
-                    Calories INT,
-                    SleepDuration DOUBLE,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                    INDEX (UserID)  -- Adding an index on UserID
-                );
-            """)
-
-            # Create Dietary Information Table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Dietary_Information (
-                    EntryID INT AUTO_INCREMENT PRIMARY KEY,
-                    UserID INT,
-                    Date DATE,
-                    MealType VARCHAR(50),
-                    FoodItem VARCHAR(255),
-                    Calories DOUBLE,
-                    Nutrients TEXT,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                    INDEX (UserID)  -- Adding an index on UserID
-                );
-            """)
-
-            # Create Wearable Data Table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Wearable_Data (
-                    DataID INT AUTO_INCREMENT PRIMARY KEY,
-                    UserID INT,
-                    DeviceID VARCHAR(100),
-                    Timestamp TIMESTAMP,
-                    HeartRate INT,
-                    BloodOxygen INT,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                    INDEX (UserID)  -- Adding an index on UserID
-                );
-            """)
-
-            # Create User Demograohics Table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Demographics (
-                    DemoID INT AUTO_INCREMENT PRIMARY KEY,
-                    UserID INT,
-                    Birthdate DATE,
-                    Gender VARCHAR(20),
-                    Weight FLOAT,
-                    Height DOUBLE,
-                    FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                    INDEX (UserID)  -- Adding an index on UserID
-                );
-            """)
-
-            # Create Nutritional Information table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Nutritional_Information (
-                    ID INT AUTO_INCREMENT PRIMARY KEY,
-                    Food_Item VARCHAR(255),
-                    Calories FLOAT,
-                    Protein DOUBLE,
-                    Fats FLOAT,
-                    Carbohydrates FLOAT,
-                    Saturated_Fats FLOAT
-                );
-            """)
-
-            
-            # Create Dietary Preferences table
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS Dietary_Preferences (
-                    PreferenceID INT AUTO_INCREMENT PRIMARY KEY,
-                    Preference VARCHAR(255),
-                    Food_Item TEXT
-                );
-            """)
-    except Exception as e:
-        print(f"Error creating tables: {e}")
-        connection.close()
-        return
-
 def etl_process_to_mysql(host, user, password, database):
     # Connect to MySQL database
     connection = pymysql.connect(host=host,
@@ -217,31 +114,15 @@ def initialize_and_create_database(host, user, password):
     finally:
         connection.close()
 
-def initialize_and_load_data():
-    # Check if a flag file exists indicating that the script has been run before
-    flag_file_path = './initialized.flag'
-
-    if os.path.isfile(flag_file_path):
-        print("Initialization has already been done. Exiting.")
-        return
-
+if __name__ == "__main__":
     # Drop existing VivaVital database (if it exists) and create a new one
     connection_config = {k: db_config[k] for k in ('host', 'user', 'password')}  # Excluding the 'database' key
+    initialize_and_create_database(**connection_config)
+
+    # Connect to the newly created VivaVital database
     connection = create_connection()
 
     if connection:
-        try:
-            # Create tables
-            create_tables(connection)
-
-            # ETL process to load initial data
-            etl_process_to_mysql(**db_config)
-
-            # Create a flag file to indicate that initialization has been done
-            with open(flag_file_path, 'w') as flag_file:
-                flag_file.write("Initialized")
-        finally:
-            connection.close()
-
-if __name__ == "__main__":
-    initialize_and_load_data()
+        # load data on tables
+        etl_process_to_mysql(**db_config)
+        connection.close()

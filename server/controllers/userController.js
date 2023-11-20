@@ -1,5 +1,12 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import db from '../db.js';
+
+const JWT_SECRET = process.env.JWT_SECRET; // Ensure this is set in your environment
+
+const createToken = (userId) => {
+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' }); // Customize the expiry
+};
 
 const validateEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,9 +31,10 @@ const registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO Users (Username, Email, PasswordHash) VALUES (?, ?, ?)';
+    const token = createToken(email); 
+    const query = 'INSERT INTO Users (Username, Email, PasswordHash, token) VALUES (?, ?, ?, ?)';
     
-    db.execute(query, [username, email, hashedPassword], (err, result) => {
+    db.execute(query, [username, email, hashedPassword, token], (err, result) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           return res.status(409).send('Email already in use. Please choose another email');
