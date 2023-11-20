@@ -133,4 +133,4 @@ dist
 .vscode/
 
 #final.env
-./server/final.env
+.server/final.env

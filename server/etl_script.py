@@ -48,8 +48,9 @@ def create_tables(connection):
                     Date DATE,
                     HeartRate INT,
                     Steps INT,
+                    Distance DOUBLE,
+                    Calories INT,
                     SleepDuration DOUBLE,
-                    OtherMetrics TEXT,
                     FOREIGN KEY (UserID) REFERENCES Users(UserID),
                     INDEX (UserID)  -- Adding an index on UserID
                 );
@@ -77,8 +78,8 @@ def create_tables(connection):
                     UserID INT,
                     DeviceID VARCHAR(100),
                     Timestamp TIMESTAMP,
-                    DataType VARCHAR(50),
-                    Value DOUBLE,
+                    HeartRate INT,
+                    BloodOxygen INT,
                     FOREIGN KEY (UserID) REFERENCES Users(UserID),
                     INDEX (UserID)  -- Adding an index on UserID
                 );
