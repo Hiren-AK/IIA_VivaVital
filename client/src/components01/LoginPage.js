@@ -3,7 +3,9 @@ import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../utils/temp.css'
+import './Login.css'
+import logo from './logo-white.png';
+
 
 function LoginPage() {
 
@@ -47,28 +49,37 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h2>Login to VivaVital</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={loginData.email}
-          onChange={handleChange}
-          required
-        /><br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={loginData.password}
-          onChange={handleChange}
-          required
-        /><br />
-        <button type="submit">Login</button>
-      </form>
-      {loginData.error && <div className="error">{loginData.error}</div>} {/* Display error here */}
+    <div className="login-container">
+      <div className="login-form-container">
+        <h1 className="login-title">VIVAVITAL</h1>
+        <p className="welcome-back">Welcome Back!</p>
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={loginData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={loginData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" className="sign-in-button">Sign In</button>
+          <p className="register-prompt">
+            New User? <a href="/register">Register</a>
+          </p>
+        </form>
+        {loginData.error && <div className="error">{loginData.error}</div>}
+      </div>
+      <div className="login-logo-container">
+        <img src={logo} alt="VivaVital Logo" className="login-logo" />
+      </div>
     </div>
   );
 }

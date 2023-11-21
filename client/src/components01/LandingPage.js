@@ -1,25 +1,26 @@
 import React from 'react';
+import './LandingPage.css'; // The name of your CSS file
+import logo from './logo-blue.png'
 
 function LandingPage() {
   return (
-    <div>
-      <header>
-        <h1>Welcome to VivaVital</h1>
-        <nav>
-          <a href="/login">Login</a> | <a href="/register">Register</a>
-        </nav>
-      </header>
+    <div className="landing-container">
+      <div className="landing-header">
+        <img src={logo} alt="VivaVital Logo" className="landing-logo" />
+        <h1 className="landing-title">VIVAVITAL</h1>
+      </div>
 
-      <section>
-        <h2>Track and Improve Your Health and Diet</h2>
-        <p>Join VivaVital to start managing your health and nutritional intake effectively.</p>
-      </section>
+      <div className="landing-actions">
+        <button onClick={() => window.location.href='/register'}>Register</button>
+        <button onClick={() => window.location.href='/login'}>Login</button>
+      </div>
 
-      <footer>
+      <footer className="landing-footer">
         <p>&copy; 2023 VivaVital</p>
       </footer>
     </div>
   );
 }
+
 
 export default LandingPage;

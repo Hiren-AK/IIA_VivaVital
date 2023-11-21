@@ -1,0 +1,67 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fff; /* Or any color that matches the design */
+  }
+  
+  .login-section {
+    text-align: center;
+    width: 100%; /* Or adjust to fit the design */
+  }
+  
+  .login-logo {
+    width: 120px; /* Or adjust to fit the design */
+    margin-bottom: 2rem;
+  }
+  
+  .login-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem; /* Or adjust to fit the design */
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-text {
+    margin-bottom: 2rem;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%; /* Or adjust to fit the design */
+    max-width: 300px; /* Or adjust to fit the design */
+    margin: auto;
+  }
+  
+  .login-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .register-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 1rem;
+  }
+  
