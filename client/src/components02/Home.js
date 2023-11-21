@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import calculateDailyCalories from '../APIcalls/DailyCalories';
 import './Home.css'
 
 
 const Home = () => {
   const [metrics, setMetrics] = useState(null);
+
+  const { user } = useContext(UserContext);
+  const cal = calculateDailyCalories(user.user);
 
   useEffect(() => {
     // Initialize WebSocket connection
@@ -62,6 +68,7 @@ const Home = () => {
           <p>Sleep Today (hours): {formatNumber(metrics.sleepToday)}</p>
           <p>Sleep This Week (hours): {formatNumber(metrics.sleepWeek)}</p>
           <p>Sleep Total (hours): {formatNumber(metrics.sleepTotal)}</p>
+          <p>Daily Calories Required: {formatNumber(cal)}</p>
         </div>
       ) : (
         <div>Waiting for data...</div>
