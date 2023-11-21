@@ -101,6 +101,8 @@ def create_tables(connection):
                     Gender VARCHAR(20),
                     Weight FLOAT,
                     Height DOUBLE,
+                    Activitylevel VARCHAR(8),
+                    Goal VARCHAR(12), 
                     FOREIGN KEY (UserID) REFERENCES Users(UserID),
                     INDEX (UserID)  -- Adding an index on UserID
                 );

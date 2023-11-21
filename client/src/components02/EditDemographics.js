@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import axios from 'axios';
 
-function DemographicsForm() {
+function EditDemographics() {
     const { user } = useContext(UserContext);
 
     const navigate = useNavigate();
@@ -28,8 +28,8 @@ function DemographicsForm() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('http://localhost:8001/demographics', demographics);
-        navigate('/editdemographics')
+        const response = await axios.post('http://localhost:8001/editdemographics', demographics);
+        navigate('/Home')
         console.log('Response:', response.data);
         // Redirect or update UI here
       } catch (error) {
@@ -95,4 +95,4 @@ function DemographicsForm() {
   );
 }
 
-export default DemographicsForm;
+export default EditDemographics;

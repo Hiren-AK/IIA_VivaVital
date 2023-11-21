@@ -76,13 +76,13 @@ const loginUser = async (req, res) => {
 };
 
 const insertDemographics = async (req, res) => {
-  const { userID, birthdate, gender, weight, height } = req.body;
+  const { userID, birthdate, gender, weight, height, activityLevel, goal } = req.body;
 
   try {
     await db.execute(`
-      INSERT INTO Demographics (UserID, Birthdate, Gender, Weight, Height)
-      VALUES (?, ?, ?, ?, ?)
-    `, [userID, birthdate, gender, weight, height]);
+      INSERT INTO Demographics (UserID, Birthdate, Gender, Weight, Height, Activitylevel, Goal)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `, [userID, birthdate, gender, weight, height, activityLevel, goal]);
 
     res.status(200).send('Demographic data added successfully');
   } catch (err) {
@@ -91,4 +91,28 @@ const insertDemographics = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, insertDemographics };
+const editDemographics = async (req, res) => {
+  const { userID, birthdate, gender, weight, height, activityLevel, goal } = req.body;
+  const query = 'SELECT COUNT(*) AS count FROM Demographics WHERE UserID = ?';
+  const [rows] = await db.promise().query(query, [userID]);
+
+  if (rows.length === 1) {
+    try {
+      await db.execute(`
+        UPDATE Demographics
+        SET Birthdate = ?, Gender = ?, Weight = ?, Height = ?, Activitylevel = ?, Goal = ?
+        WHERE UserID = ?
+    `, [birthdate, gender, weight, height, activityLevel, goal, userID]);
+      res.status(200).send('Demographic data edited successfully');
+    } catch (err) {
+      console.error('Server error:', err.message); // Log detailed error message
+      res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+    }
+  }
+  else {
+    console.error('Server error:', err.message); // Log detailed error message
+    res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+  }
+};
+
+export { registerUser, loginUser, insertDemographics, editDemographics };
