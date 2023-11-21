@@ -60,10 +60,10 @@ async function calculateDailyCalories(userID) {
         const valueToFind = mapping[goal];
         console.log(valueToFind);
         if (valueToFind === "maintain weight"){
-            console.log(goals[valueToFind]);
+            return(goals[valueToFind]);
         }
         else{
-            console.log(goals[valueToFind].calory);
+            return(goals[valueToFind].calory);
         }
         // Here you can further process the response or send it to the frontend
     } catch (error) {
