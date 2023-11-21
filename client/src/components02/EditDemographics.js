@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
+import calculateDailyCalories from '../components03/DailyCalories';
 import axios from 'axios';
 
 function EditDemographics() {
@@ -29,6 +30,7 @@ function EditDemographics() {
       e.preventDefault();
       try {
         const response = await axios.post('http://localhost:8001/editdemographics', demographics);
+        calculateDailyCalories(user.user)
         navigate('/Home')
         console.log('Response:', response.data);
         // Redirect or update UI here

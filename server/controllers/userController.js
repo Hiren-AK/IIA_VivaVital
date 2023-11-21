@@ -110,9 +110,29 @@ const editDemographics = async (req, res) => {
     }
   }
   else {
-    console.error('Server error:', err.message); // Log detailed error message
-    res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+    console.error('Server error:', 'More than one row in Demo');
+    res.status(500).send('Server error: ' + 'More than one row in Demo');
   }
 };
 
-export { registerUser, loginUser, insertDemographics, editDemographics };
+const getDemographics = async (req, res) => {
+  const { userID } = req.body;
+  const query = 'SELECT * FROM Demographics WHERE UserID = ?';
+  const [rows] = await db.promise().query(query, [userID]);
+  const user = rows[0];
+
+  if (rows.length === 1) {
+    try {
+      res.status(200).json({message: 'Demographic data fetched successfully', data: user});
+    } catch (err) {
+      console.error('Server error:', err.message); // Log detailed error message
+      res.status(500).send('Server error: ' + err.message); // Optionally send the error message in response for debugging
+    }
+  }
+  else {
+    console.error('Server error:', 'More than one row in Demo'); 
+    res.status(500).send('Server error: ' + 'More than one row in Demo');
+  }
+};
+
+export { registerUser, loginUser, insertDemographics, editDemographics, getDemographics };
