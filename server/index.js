@@ -32,6 +32,15 @@ wss.on('connection', (ws) => {
       
       saveDataToDatabase(data);
 
+
+      // Send this data to all connected WebSocket clients
+      wss.clients.forEach(client => {
+        if (client.readyState === ws.OPEN) {
+          client.send(JSON.stringify(data));
+          console.log('Sent data to client:', data);
+        }
+      });
+
     } catch (error) {
       console.error('Error parsing JSON message:', error);
       // Handle non-JSON messages or parsing errors
@@ -42,7 +51,7 @@ wss.on('connection', (ws) => {
     console.log('WebSocket client disconnected');
   });
 
-  ws.send('WebSocket connection established.');
+  ws.send(JSON.stringify({ message: 'WebSocket connection established with frontend.' }));
 });
 
 db.connect(err => {

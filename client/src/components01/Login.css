@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     background: #fff; /* Or any color that matches the design */
+    color: #fff;
   }
   
   .login-section {

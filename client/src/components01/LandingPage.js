@@ -1,6 +1,6 @@
 import React from 'react';
 import './LandingPage.css'; // The name of your CSS file
-import logo from './logo-blue.png'
+import logo from './logo-white.png'
 
 function LandingPage() {
   return (

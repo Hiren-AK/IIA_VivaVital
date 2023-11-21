@@ -1,63 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Montserrat:wght@700&display=swap');
 
 
-.landing-container {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 50px 20px;
+/* LandingPage.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Manrope', sans-serif; /* Set default font to Manrope */
+    /* set font color to #101010 */
+    color: #101010;
+    background-color: #101010;
+    /*background: url(./BGFull.png) no-repeat center center fixed; */
+  }
+  
+  .landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    align-items: center;
+    /*background-color: #101010; */
   }
   
   .landing-header {
-    margin-bottom: 50px;
+    text-align: center;
+    margin-top: 10%; /* Adjust as needed for your design */
   }
   
   .landing-logo {
-    width: 150px; /* Adjust size as needed */
-    margin-bottom: 20px;
+    width: 150px; /* Adjust as needed for your design */
   }
   
   .landing-title {
-    font-size: 41.05px;
-    color: #4164D0; /* Adjust color as needed */
-    margin-bottom: 50px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /* Specific font for title */
+    color: white; /* Or any color that fits the design */
+    font-weight: 700; /* Montserrat bold */
     letter-spacing: 6.157px;
-    font-weight: 700;
+    font-size: 41.05px;
   }
-
+  
+  
   .landing-actions {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column;
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Center buttons vertically */
+    height: 200px; /* Adjust height to ensure buttons are in the center of the screen */
+  }
+  
+  button {
+    width: 303px; /* Fixed width as per requirement */
+    height: 81px; /* Fixed height as per requirement */
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
     align-items: center;
-    gap: 15px; /* Add space between buttons */
-  }
-  
-  .landing-actions button {
-    background-color: #4164D0; /* Adjust color as needed */
-    color: white;
     border: none;
-    padding: 15px 60px;
-    margin: 10px 0;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    border-radius: 30px;
+    font-size: 21px;
     cursor: pointer;
-    width: 80%;
-    max-width: 300px;
-    font-family: 'Manrope', sans-serif;
+    outline: none;
+    transition: background-color 0.3s ease;
+    font-weight: 700;
+    display: flex;
   }
   
-  .landing-actions button:hover {
-    background-color: #4164D0; /* Darker shade for hover effect */
+  button:first-of-type {
+    background-color: #B2F042;
+    color: #101010;
+  }
+  
+  button:last-of-type {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  button:hover {
+    opacity: 0.8;
   }
   
   .landing-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     text-align: center;
-    padding: 20px 0;
+    color: white;
+    padding: 10px;
+    font-size: 12px;
   }
+  
   
