@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import axios
- from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import axios from 'axios';
+
 function DemographicsForm() {
+    const { user } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
     const [demographics, setDemographics] = useState({
       birthdate: '',
       gender: '',
       weight: '',
-      height: ''
+      height: '',
+      userID: user
     });
+    console.log('Sending demographics:', demographics);
     const [errors, setErrors] = useState({});
   
     const handleChange = (e) => {
@@ -17,8 +26,8 @@ function DemographicsForm() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('http://localhost:8001/api/demographics', demographics);
-        // Handle success, e.g., redirect to dashboard or show success message
+        const response = await axios.post('http://localhost:8001/demographics', demographics);
+        navigate('/Home')
         console.log('Response:', response.data);
         // Redirect or update UI here
       } catch (error) {

@@ -76,13 +76,13 @@ const loginUser = async (req, res) => {
 };
 
 const insertDemographics = async (req, res) => {
-  const { userId, birthdate, gender, weight, height } = req.body;
+  const { userID, birthdate, gender, weight, height } = req.body;
 
   try {
     await db.execute(`
       INSERT INTO Demographics (UserID, Birthdate, Gender, Weight, Height)
       VALUES (?, ?, ?, ?, ?)
-    `, [userId, birthdate, gender, weight, height]);
+    `, [userID, birthdate, gender, weight, height]);
 
     res.status(200).send('Demographic data added successfully');
   } catch (err) {
@@ -92,30 +92,3 @@ const insertDemographics = async (req, res) => {
 };
 
 export { registerUser, loginUser, insertDemographics };
-
-
-// function get_UserID(email, callback){
-      
-//   var sql = "SELECT UserID from Users where Email = ?";
-
-//   db.query(sql, function(err, results){
-//         if (err){ 
-//           throw err;
-//         }
-//         console.log(results[0].objid); // good
-//         stuff_i_want = results[0].objid;  // Scope is larger than function
-
-//         return callback(results[0].objid);
-// })
-// }
-
-
-// //usage
-
-// var stuff_i_want = '';
-
-// get_info(parm, function(result){
-// stuff_i_want = result;
-
-// //rest of your code goes in here
-// });

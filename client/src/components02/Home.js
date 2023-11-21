@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInputForm from './UserInputForm';
+import UserInputForm from '../components01/UserInputForm';
 
 function Home() {
   return (

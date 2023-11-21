@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../utils/temp.css'
 
 function LoginPage() {
+
+  const navigate = useNavigate();
 
   const { setUser } = useContext(UserContext);
 
@@ -31,10 +34,10 @@ function LoginPage() {
       const userID = response.data.userId;
 
       // Access and use the data from the server response
-      console.log('User ID:', userID);
+      console.log('User ID in Login Page:', userID);
 
-      setUser({ userID: userID });
-      // Handle successful login here, like redirecting to another page
+      setUser({ user: userID });
+      navigate('/Home');
     } catch (error) {
       if (error.response) {
         // Set the error message from the backend
