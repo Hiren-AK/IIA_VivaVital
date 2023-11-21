@@ -4,7 +4,6 @@ import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css'
-import logo from './logo-white.png';
 
 
 function LoginPage() {
@@ -70,16 +69,14 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-          <button type="submit" className="sign-in-button">Sign In</button>
+          <button type="submit" className="sign-in-button" color='#B2F042'>Sign In</button>
           <p className="register-prompt">
-            New User? <a href="/register">Register</a>
+            New User? <a href="/register" color='#4164D0'>Register</a>
           </p>
         </form>
         {loginData.error && <div className="error">{loginData.error}</div>}
       </div>
-      <div className="login-logo-container">
-        <img src={logo} alt="VivaVital Logo" className="login-logo" />
-      </div>
+      
     </div>
   );
 }
