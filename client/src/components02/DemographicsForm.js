@@ -29,9 +29,8 @@ function DemographicsForm() {
       e.preventDefault();
       try {
         const response = await axios.post('http://localhost:8001/demographics', demographics);
-        navigate('/Home');
         console.log('Response:', response.data);
-        // Redirect or update UI here
+        navigate('/Home');
       } catch (error) {
         if (error.response && error.response.data) {
           // Update the state with the backend error
