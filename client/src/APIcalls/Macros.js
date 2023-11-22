@@ -17,32 +17,25 @@ function keepWithinBounds(value, min, max) {
 }
 
 // Main function to calculate daily calories
-async function calculateDailyCalories(userID) {
+async function calculateMacros(userID) {
     const response = await axios.post('http://localhost:8001/getdemo', { userID: userID });
     const userData = response.data.data;
     const age = calculateAge(userData.Birthdate);
     const weight = keepWithinBounds(userData.Weight, 40, 160);
     const height = keepWithinBounds(userData.Height, 130, 230);
     const goal = userData.Goal;
-    const mapping = {
-        "maintain": "maintain weight",
-        "mildlose": "Mild weight loss",
-        "weightlose": "Weight loss",
-        "extremelose": "Extreme weight loss",
-        "mildgain": "Mild weight gain",
-        "weightgain": "Weight gain",
-        "extremegain": "Extreme weight gain"
-    };
-
+    const lst = userData.Activitylevel.slice(-1);
+    const num = parseInt(lst);
     const options = {
         method: 'GET',
-        url: 'https://fitness-calculator.p.rapidapi.com/dailycalorie',
+        url: 'https://fitness-calculator.p.rapidapi.com/macrocalculator',
         params: {
             age: age,
             gender: userData.Gender.toLowerCase(),
             height: height,
             weight: weight,
-            activitylevel: userData.Activitylevel
+            activitylevel: num,
+            goal: goal
         },
         headers: {
             'X-RapidAPI-Key': 'b791345cc5msh7b0ad5f3214240bp1411c5jsncfad6f862c01',
@@ -51,20 +44,25 @@ async function calculateDailyCalories(userID) {
     };
 
     try {
-        console.log("Check1 from DailyCalories");
         const response = await axios.request(options);
-        console.log("Check2 from DailyCalories");
-        console.log(response.data);
-        const goals = response.data.data.goals;
-        console.log(goals);
-        const valueToFind = mapping[goal];
-        console.log(valueToFind);
-        if (valueToFind === "maintain weight"){
-            return(goals[valueToFind]);
-        }
-        else{
-            return(goals[valueToFind].calory);
-        }
+        console.log(response.data.data);
+        const flatData = {
+            calorie: response.data.data.calorie,
+            balanced_protein: response.data.data.balanced.protein,
+            balanced_fat: response.data.data.balanced.fat,
+            balanced_carbs: response.data.data.balanced.carbs,
+            highprotein_protein: response.data.data.highprotein.protein,
+            highprotein_fat: response.data.data.highprotein.fat,
+            highprotein_carbs: response.data.data.highprotein.carbs,
+            lowcarbs_protein: response.data.data.lowcarbs.protein,
+            lowcarbs_fat: response.data.data.lowcarbs.fat,
+            lowcarbs_carbs: response.data.data.lowcarbs.carbs,
+            lowfat_protein: response.data.data.lowfat.protein,
+            lowfat_fat: response.data.data.lowfat.fat,
+            lowfat_carbs: response.data.data.lowfat.carbs
+        };
+        console.log(flatData);
+        return(flatData);
         // Here you can further process the response or send it to the frontend
     } catch (error) {
         console.error(error);
@@ -72,4 +70,4 @@ async function calculateDailyCalories(userID) {
     }
 }
 
-export default calculateDailyCalories;
+export default calculateMacros;

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
-import calculateDailyCalories from '../APIcalls/DailyCalories';
+import calculateBmi from '../APIcalls/Bmi';
+import calculateMacros from '../APIcalls/Macros';
+import calculateIdealWeight from '../APIcalls/IdealWeight';
 import './Home.css'
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Link } from 'react-router-dom';
@@ -9,10 +11,47 @@ import { Link } from 'react-router-dom';
 
 
 const Home = () => {
+  const { user } = useContext(UserContext);
   const [metrics, setMetrics] = useState(null);
 
-  const { user } = useContext(UserContext);
-  const cal = calculateDailyCalories(user.user);
+  const [bmi, setBmi] = useState(null);
+  const [idealWeight, setIdealWeight] = useState(null);
+  const [macros, setMacros] = useState(null);
+
+  useEffect(() => {
+    async function fetchMacros() {
+      try {
+        const result = await calculateMacros(user.user);
+        setMacros(result);
+      } catch (error) {
+        console.error('Error fetching BMI:', error);
+        // Handle the error appropriately
+      }
+    }
+    fetchMacros();
+
+    async function fetchBmi() {
+      try {
+        const result = await calculateBmi(user.user);
+        setBmi(result);
+      } catch (error) {
+        console.error('Error fetching BMI:', error);
+        // Handle the error appropriately
+      }
+    }
+    fetchBmi();
+
+    async function fetchIdealWeight() {
+      try {
+        const result = await calculateIdealWeight(user.user);
+        setIdealWeight(result);
+      } catch (error) {
+        console.error('Error fetching BMI:', error);
+        // Handle the error appropriately
+      }
+    }
+    fetchIdealWeight();
+  }, [user.user]);
   useEffect(() => {
     // Initialize WebSocket connection
     const ws = new WebSocket('ws://192.168.46.232:8001');
@@ -57,7 +96,8 @@ const Home = () => {
   //   navigate('/recipes');
   // };
 
-  return (
+  if(macros){
+    return (
     <div>
       <h1>VivaVital Health Metrics Dashboard</h1>
       {metrics ? (
@@ -74,7 +114,27 @@ const Home = () => {
           <p>Sleep Today (hours): {formatNumber(metrics.sleepToday)}</p>
           <p>Sleep This Week (hours): {formatNumber(metrics.sleepWeek)}</p>
           <p>Sleep Total (hours): {formatNumber(metrics.sleepTotal)}</p>
-          <p>Daily Calories Required: {formatNumber(cal)}</p>
+          <p>BMI: {bmi}</p>
+          <p>Ideal Weight: {idealWeight}</p>
+          <div>
+            <h2>Calories: {macros.calorie}</h2>
+            <h3>Balanced Diet</h3>
+            <p>Protein: {macros.balanced_protein}</p>
+            <p>Fat: {macros.balanced_fat}</p>
+            <p>Carbs: {macros.balanced_carbs}</p>
+            <h3>High Protein Diet</h3>
+            <p>Protein: {macros.highprotein_protein}</p>
+            <p>Fat: {macros.highprotein_fat}</p>
+            <p>Carbs: {macros.highprotein_carbs}</p>
+            <h3>Low Carbs Diet</h3>
+            <p>Protein: {macros.lowcarbs_protein}</p>
+            <p>Fat: {macros.lowcarbs_fat}</p>
+            <p>Carbs: {macros.lowcarbs_carbs}</p>
+            <h3>Low Fat Diet</h3>
+            <p>Protein: {macros.lowfat_protein}</p>
+            <p>Fat: {macros.lowfat_fat}</p>
+            <p>Carbs: {macros.lowfat_carbs}</p>
+          </div>
         </div>
       ) : (
         <div>Waiting for data...</div>
@@ -85,6 +145,6 @@ const Home = () => {
     </div>
   );
 }
-
+};
 
 export default Home;

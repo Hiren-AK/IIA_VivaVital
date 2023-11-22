@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise'); // Use 'mysql2' for async/await support
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: 'Devrocks9.',
+  password: 'p@sswOrd123',
   database: 'VivaVital',
 };
 
