@@ -6,7 +6,6 @@ VivaVital is a comprehensive platform designed to track and manage your health a
 
 - Track physical activities and sleep patterns.
 - Log dietary habits and nutritional intake.
-- Monitor heart rate and blood oxygen levels.
 - Manage user demographics and preferences.
 
 ## Getting Started
