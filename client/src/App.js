@@ -7,6 +7,7 @@ import RegisterPage from './components01/RegisterPage';
 import DemographicsForm from './components02/DemographicsForm';
 import EditDemographics from './components02/EditDemographics';
 import Home from './components02/Home';
+import RecipeSearch from './components02/RecipeSearch';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/demographics" element={<DemographicsForm />} />
           <Route path="/home" element={<Home/>}/>
           <Route path="/editdemographics" element={<EditDemographics/>}/>
+          <Route path="/recipes" element={<RecipeSearch/>}/>
         </Routes>
       </Router>
     </UserProvider>

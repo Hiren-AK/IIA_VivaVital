@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise'); // Use 'mysql2' for async/await support
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: 'chesahil23',
+  password: 'Devrocks9.',
   database: 'VivaVital',
 };
 
@@ -25,9 +25,7 @@ const dropTables = async () => {
     const connection = await mysql.createConnection(dbConfig);
 
     // Drop individual tables
-    await connection.query('DROP TABLE IF EXISTS Demographics, Dietary_Information, Dietary_Preferences, Health_Metrics, Nutritional_Information, Wearable_Data;');
-    await connection.query('DROP TABLE IF EXISTS Users;');
-
+    await connection.query('DROP TABLE IF EXISTS Demographics, Dietary_Information, Dietary_Preferences, Health_Metrics, Nutritional_Information, Users, Wearable_Data, VeganRecipes, PescetarianRecipes, LactoVegetarianRecipes , NonVegetarianRecipes, Recipes ;');
     console.log('Tables dropped successfully.');
 
     // Close the database connection

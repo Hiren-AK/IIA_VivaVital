@@ -1,6 +1,8 @@
+//usercontroller.js
 import bcrypt from 'bcrypt';
 import db from '../db.js';
 import mysql from 'mysql2/promise';
+
 
 
 const validateEmail = (email) => {
@@ -135,4 +137,36 @@ const getDemographics = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, insertDemographics, editDemographics, getDemographics };
+const getRecipes = async (req, res) => {
+  const { dietaryPreference, minCarbs, maxCarbs, minProtein, maxProtein, minFat, maxFat, minEnergy, maxEnergy } = req.query;
+
+  try {
+    let query = `SELECT * FROM Recipes WHERE 1 = 1`;
+    const queryValues = [];
+
+    // Filter by dietary preference
+    if (dietaryPreference) {
+      const dietaryTable = dietaryPreference + 'Recipes';
+      query += ` AND RecipeID IN (SELECT RecipeID FROM ${dietaryTable})`;
+    }
+
+    // Nutritional filters
+    if (minCarbs) { query += ' AND Carbohydrates >= ?'; queryValues.push(minCarbs); }
+    if (maxCarbs) { query += ' AND Carbohydrates <= ?'; queryValues.push(maxCarbs); }
+    if (minProtein) { query += ' AND Protein >= ?'; queryValues.push(minProtein); }
+    if (maxProtein) { query += ' AND Protein <= ?'; queryValues.push(maxProtein); }
+    if (minFat) { query += ' AND Fats >= ?'; queryValues.push(minFat); }
+    if (maxFat) { query += ' AND Fats <= ?'; queryValues.push(maxFat); }
+    if (minEnergy) { query += ' AND Energy >= ?'; queryValues.push(minEnergy); }
+    if (maxEnergy) { query += ' AND Energy <= ?'; queryValues.push(maxEnergy); }
+
+    const [recipes] = await db.promise().query(query, queryValues);
+    res.status(200).json(recipes);
+  } catch (err) {
+    console.error('Server error:', err.message);
+    res.status(500).send('Server error: ' + err.message);
+  }
+};
+
+
+export { registerUser, loginUser, insertDemographics, editDemographics, getRecipes };

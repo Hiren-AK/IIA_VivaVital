@@ -1,56 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react';
-import { UserContext } from '../UserContext';
-import calculateDailyCalories from '../APIcalls/DailyCalories';
-import './Home.css'
+import React from 'react';
+import UserInputForm from '../components01/UserInputForm';
 
-
-const Home = () => {
-  const [metrics, setMetrics] = useState(null);
-
-  const { user } = useContext(UserContext);
-  const cal = calculateDailyCalories(user.user);
-
-  useEffect(() => {
-    // Initialize WebSocket connection
-    const ws = new WebSocket('ws://192.168.46.232:8001');
-
-    ws.onopen = () => {
-      console.log('WebSocket connected to frontend');
-    };
-
-    ws.onmessage = (event) => {
-      try {
-        // Attempt to parse the event data as JSON
-        const data = JSON.parse(event.data);
-        console.log('Data received:', data);
-        setMetrics(data);
-      } catch (error) {
-        console.error('Error parsing message:', error);
-        // Handle any non-JSON messages or other actions here
-      }
-    };
-    
-
-    ws.onclose = () => {
-      console.log('WebSocket disconnected from frontend');
-    };
-
-    ws.onerror = (error) => {
-      console.error('frontend WebSocket error:', error);
-    };
-
-    // Clean up the WebSocket connection when the component unmounts
-    return () => {
-      ws.close();
-    };
-  }, []);
-
-  // Format number to have commas for thousands
-  const formatNumber = (num) => {
-    return num ? num.toLocaleString() : '0';
-  };
-
+function Home() {
   return (
     <div>
       <h1>VivaVital Health Metrics Dashboard</h1>
