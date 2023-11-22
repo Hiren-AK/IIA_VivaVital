@@ -142,6 +142,9 @@ const Home = () => {
       <Link to="/recipes">
         <button>Search Recipes</button>
       </Link>
+      <Link to="/editdemographics">
+        <button>Edit Demographic</button>
+      </Link>
     </div>
   );
 }
