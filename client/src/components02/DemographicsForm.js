@@ -29,7 +29,7 @@ function DemographicsForm() {
       e.preventDefault();
       try {
         const response = await axios.post('http://localhost:8001/demographics', demographics);
-        navigate('/editdemographics')
+        navigate('/Home');
         console.log('Response:', response.data);
         // Redirect or update UI here
       } catch (error) {

@@ -52,7 +52,7 @@ const createTables = async () => {
 const importData = async () => {
     await createTables();
   
-    fs.createReadStream('/home/dev/Desktop/IIA_N/IIA_VivaVital/server/data/recipe_IIA.csv')
+    fs.createReadStream('./data/recipe_IIA.csv')
       .pipe(csvParser())
       .on('data', async (row) => {
         const {
