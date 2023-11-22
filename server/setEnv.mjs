@@ -21,7 +21,7 @@ const envConfig = `REACT_APP_API_URL=http://${ip}:8001
 PORT=8001
 VV_HOST=localhost
 VV_USER=root
-VV_PASSWORD=chesahil23
+VV_PASSWORD=Devrocks9.
 VV_NAME=VivaVital
 \n`;
 

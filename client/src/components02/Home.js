@@ -3,6 +3,9 @@ import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import calculateDailyCalories from '../APIcalls/DailyCalories';
 import './Home.css'
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link } from 'react-router-dom';
+
 
 
 const Home = () => {
@@ -10,7 +13,6 @@ const Home = () => {
 
   const { user } = useContext(UserContext);
   const cal = calculateDailyCalories(user.user);
-
   useEffect(() => {
     // Initialize WebSocket connection
     const ws = new WebSocket('ws://192.168.46.232:8001');
@@ -50,6 +52,10 @@ const Home = () => {
   const formatNumber = (num) => {
     return num ? num.toLocaleString() : '0';
   };
+  // const handleRecipeSearch = () => {
+  //   // Navigate to the "/recipes" route when the button is clicked
+  //   navigate('/recipes');
+  // };
 
   return (
     <div>
@@ -73,8 +79,12 @@ const Home = () => {
       ) : (
         <div>Waiting for data...</div>
       )}
+      <Link to="/recipes">
+        <button>Search Recipes</button>
+      </Link>
     </div>
   );
-};
+}
+
 
 export default Home;

@@ -1,3 +1,5 @@
+//index.js
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,6 +9,7 @@ import db from './db.js'; // Import the db connection from db.js
 import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import importData from './importData.js'; // Import the function
 import { WebSocketServer } from "ws";
 
 dotenv.config();
@@ -62,17 +65,29 @@ db.connect(err => {
     console.log('Connected to the database');
   }
 });
-
-// Define __dirname in ES module scope
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+db.connect(err => {
+  if (err) {
+    console.error('Could not connect to the database:', err);
+    process.exit(1);
+  } else {
+    console.log('Connected to the database');
+    importData().then(() => {
+      console.log('Data import process started');
+    }).catch(error => {
+      console.error('Error during data import:', error);
+    });
+  }
 });
+// Define __dirname in ES module scope
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// // Serve static files from the React frontend app
+// app.use(express.static(path.join(__dirname, '../client/build')));
+
+// // Anything that doesn't match the above, send back index.html
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 function saveDataToDatabase(data) {
   const { userId, date, stepsToday, stepsWeek, stepsTotal, distanceToday, distanceWeek, distanceTotal, caloriesToday, caloriesWeek, caloriesTotal, sleepToday, sleepWeek, sleepTotal } = data;
