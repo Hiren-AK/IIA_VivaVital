@@ -1,3 +1,56 @@
 body{
     color: #101010;
+
 }
+
+.home-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #121212;
+  color: white;
+}
+
+.metric-card {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    width: 150px;
+  }
+
+  .metric-title {
+    font-size: 1em;
+    color: #aaa;
+  }
+  
+  .metric-value {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adaptable grid */
+    width: 100%;
+    flex-wrap: wrap;
+    max-width: 1200px; /* Maximum width of the grid */
+    gap: 20px; /* Spacing between cards */
+    justify-content: space-around;
+  }
+
+  .diet-section {
+    margin-top: 20px;
+  }
+  
+  .diet-header {
+    font-size: 1.5em; /* Adjust size as needed */
+    margin-bottom: 10px; /* Space between the header and the cards */
+    color: #aaa; /* Adjust color as needed */
+  }

@@ -7,6 +7,11 @@ import calculateIdealWeight from '../APIcalls/IdealWeight';
 import './Home.css'
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Link } from 'react-router-dom';
+import MetricCard from './MetricCard';
+
+const formatNumber = (num) => {
+  return num ? parseFloat(num).toFixed(2).toLocaleString() : '0';
+};
 
 
 
@@ -91,60 +96,63 @@ const Home = () => {
   const formatNumber = (num) => {
     return num ? num.toLocaleString() : '0';
   };
+  const formatValue = (value) => {
+    return value ? Math.round(value).toLocaleString() : '0';
+  };
   // const handleRecipeSearch = () => {
   //   // Navigate to the "/recipes" route when the button is clicked
   //   navigate('/recipes');
   // };
 
-  if(macros){
+  if(macros && metrics){
     return (
-    <div>
-      <h1>VivaVital Health Metrics Dashboard</h1>
-      {metrics ? (
-        <div>
-          <p>Steps Today: {formatNumber(metrics.stepsToday)}</p>
-          <p>Steps This Week: {formatNumber(metrics.stepsWeek)}</p>
-          <p>Steps Total: {formatNumber(metrics.stepsTotal)}</p>
-          <p>Distance Today (meters): {formatNumber(metrics.distanceToday)}</p>
-          <p>Distance This Week (meters): {formatNumber(metrics.distanceWeek)}</p>
-          <p>Distance Total (meters): {formatNumber(metrics.distanceTotal)}</p>
-          <p>Calories Burned Today: {formatNumber(metrics.caloriesToday)}</p>
-          <p>Calories Burned This Week: {formatNumber(metrics.caloriesWeek)}</p>
-          <p>Calories Burned Total: {formatNumber(metrics.caloriesTotal)}</p>
-          <p>Sleep Today (hours): {formatNumber(metrics.sleepToday)}</p>
-          <p>Sleep This Week (hours): {formatNumber(metrics.sleepWeek)}</p>
-          <p>Sleep Total (hours): {formatNumber(metrics.sleepTotal)}</p>
-          <p>BMI: {bmi}</p>
-          <p>Ideal Weight: {idealWeight}</p>
-          <div>
-            <h2>Calories: {macros.calorie}</h2>
-            <h3>Balanced Diet</h3>
-            <p>Protein: {macros.balanced_protein}</p>
-            <p>Fat: {macros.balanced_fat}</p>
-            <p>Carbs: {macros.balanced_carbs}</p>
-            <h3>High Protein Diet</h3>
-            <p>Protein: {macros.highprotein_protein}</p>
-            <p>Fat: {macros.highprotein_fat}</p>
-            <p>Carbs: {macros.highprotein_carbs}</p>
-            <h3>Low Carbs Diet</h3>
-            <p>Protein: {macros.lowcarbs_protein}</p>
-            <p>Fat: {macros.lowcarbs_fat}</p>
-            <p>Carbs: {macros.lowcarbs_carbs}</p>
-            <h3>Low Fat Diet</h3>
-            <p>Protein: {macros.lowfat_protein}</p>
-            <p>Fat: {macros.lowfat_fat}</p>
-            <p>Carbs: {macros.lowfat_carbs}</p>
+      <div className="home-container">
+        <h1>VivaVital Health Metrics Dashboard</h1>
+        <div className="metrics-section">
+          <div className="metrics-grid">
+            <MetricCard title="Steps" value={formatValue(metrics?.stepsToday)} unit="" />
+            <MetricCard title="Distance" value={formatValue(metrics?.distanceToday)} unit="km" />
+            <MetricCard title="Calories Burned" value={formatValue(metrics?.caloriesToday)} unit="cal" />
+            <MetricCard title="Sleep" value={formatValue(metrics?.sleepToday)} unit="hours" />
+            <MetricCard title="BMI" value={formatValue(bmi)} unit="" />
+            <MetricCard title="Ideal Weight" value={formatValue(idealWeight)} unit="kg" />
+            <MetricCard title="Daily Calorie Requirement" value={formatValue(macros.calorie)} unit="cal" />
+          </div>
+          <div className="diet-section">
+            <div className="diet-header">Balanced Diet</div>
+            <div className="metrics-grid">
+              <MetricCard title="Protein" value={formatValue(macros?.balanced_protein)} unit="g" />
+              <MetricCard title="Fat" value={formatValue(macros?.balanced_fat)} unit="g" />
+              <MetricCard title="Carbs" value={formatValue(macros?.balanced_carbs)} unit="g" />
+            </div>
+          </div>
+          <div className="diet-section">
+            <div className="diet-header">Low Carbs Diet</div>
+            <div className="metrics-grid">
+              <MetricCard title="Protein" value={formatValue(macros.lowcarbs_protein)} unit="g" />
+              <MetricCard title="Fat" value={formatValue(macros.lowcarbs_fat)} unit="g" />
+              <MetricCard title="Carbs" value={formatValue(macros.lowcarbs_carbs)} unit="g" />
+            </div>
+          </div>
+          <div className="diet-section">
+            <div className="diet-header">Low Fat Diet</div>
+            <div className="metrics-grid">
+              <MetricCard title="Protein" value={formatValue(macros.lowfat_protein)} unit="g" />
+              <MetricCard title="Fat" value={formatValue(macros.lowfat_fat)} unit="g" />
+              <MetricCard title="Carbs" value={formatValue(macros.lowfat_carbs)} unit="g" />
+            </div>
           </div>
         </div>
-      ) : (
-        <div>Waiting for data...</div>
-      )}
-      <Link to="/recipes">
-        <button>Search Recipes</button>
-      </Link>
-    </div>
-  );
+        <Link to="/recipes">
+          <button>Search Recipes</button>
+        </Link>
+      </div>
+    );
+
+  
 }
+
+
 };
 
 export default Home;

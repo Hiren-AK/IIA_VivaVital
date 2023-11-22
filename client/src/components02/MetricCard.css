@@ -1,0 +1,35 @@
+.metric-card {
+    background: #333; /* Dark background */
+    color: #fff; /* Light text */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+  }
+  
+  .metric-title {
+    font-size: 1rem;
+    color: #aaa; /* Subdued text color */
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  
+  .metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 50px;
+    /* ... other styles */
+  }
+  
+  
