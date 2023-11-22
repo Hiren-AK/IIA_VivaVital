@@ -5,10 +5,9 @@
 
 
 
-html, body {
+body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
     font-family: 'Manrope', sans-serif; /* Set default font to Manrope */
     /* set font color to #101010 */
     color: #fff;
@@ -71,12 +70,12 @@ html, body {
     display: flex;
   }
   
-  button:first-of-type {
+  .register-button {
     background-color: #B2F042;
     color: #101010;
   }
   
-  button:last-of-type {
+  .login-button {
     background-color: transparent;
     color: white;
     border: 2px solid white;

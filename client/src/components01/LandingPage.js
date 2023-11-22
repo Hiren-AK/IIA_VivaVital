@@ -11,8 +11,8 @@ function LandingPage() {
       </div>
 
       <div className="landing-actions">
-        <button onClick={() => window.location.href='/register'}>Register</button>
-        <button onClick={() => window.location.href='/login'}>Login</button>
+        <button className='register-button' onClick={() => window.location.href='/register'}>Register</button>
+        <button className='login-button' onClick={() => window.location.href='/login'}>Login</button>
       </div>
 
       <footer className="landing-footer">

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
-import '../utils/temp.css';
+import './Register.css';
 
 
 function RegisterPage() {
@@ -93,10 +93,27 @@ function RegisterPage() {
   };
 
   return (
-    <div>
-      <h2>Register for VivaVital</h2>
-      <form onSubmit={handleSubmit}>
+    <div className='register-container'>
+      <div className="register-form-container">
+      <h1 className="register-title">VIVAVITAL</h1>
+      <p className="welcome-text">Glad to have you onboard!</p>
+      <form onSubmit={handleSubmit} className="register-Form">
         <input
+        style={{
+          borderRadius: '16px',
+          padding: '10px 35px',
+          border: '1px solid #ccc',
+          backgroundColor: 'white',
+          color: '#333',
+          width: '300px',
+          height: '40px',
+          alignItems: 'center',
+          fontFamily: 'Montserrat',
+          fontSize: '18px',
+          fontWeight: '600',
+          gap: '35px',
+          margin: '10px 0',
+        }}
           type="text"
           name="username"
           placeholder="Username"
@@ -106,6 +123,21 @@ function RegisterPage() {
         />
         <br />
         <input
+        style={{
+          borderRadius: '16px',
+          padding: '10px 35px',
+          border: '1px solid #ccc',
+          backgroundColor: 'white',
+          color: '#333',
+          width: '300px',
+          height: '40px',
+          alignItems: 'center',
+          fontFamily: 'Montserrat',
+          fontSize: '18px',
+          fontWeight: '600',
+          gap: '35px',
+          margin: '10px 0',
+        }}
           type="email"
           name="email"
           placeholder="Email"
@@ -116,6 +148,21 @@ function RegisterPage() {
         {userData.errors.email && <div className="error">{userData.errors.email}</div>}
         <br />
         <input
+        style={{
+          borderRadius: '16px',
+          padding: '10px 35px',
+          border: '1px solid #ccc',
+          backgroundColor: 'white',
+          color: '#333',
+          width: '300px',
+          height: '40px',
+          alignItems: 'center',
+          fontFamily: 'Montserrat',
+          fontSize: '18px',
+          fontWeight: '600',
+          margin: '10px 0',
+          gap: '35px',
+        }}
           type="password"
           name="password"
           placeholder="Password"
@@ -125,9 +172,12 @@ function RegisterPage() {
         />
         {userData.errors.password && <div className="error">{userData.errors.password}</div>}
         <br />
-        <button type="submit">Register</button>
+        <button type="submit" className="sign-up-button">Sign Up</button>
+        <p className="login-prompt">Existing User? <a href="/login">Log In</a></p>
+
       </form>
       {userData.errors.backend && <div className="error">{userData.errors.backend}</div>}
+    </div>
     </div>
   );
 }

@@ -90,7 +90,7 @@ function EditDemographics() {
               <option value="extremegain">Extreme weight gain</option>
           </select>
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" color='000'>Submit</button>
     </form>
   );
 }
