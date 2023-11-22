@@ -169,4 +169,4 @@ const getRecipes = async (req, res) => {
 };
 
 
-export { registerUser, loginUser, insertDemographics, editDemographics, getRecipes };
+export { registerUser, loginUser, insertDemographics, editDemographics, getRecipes, getDemographics };
