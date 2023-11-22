@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Montserrat:wght@700&display=swap');
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+  background-color: #101010;
+  background-image: url('BGRightIcon.png'); /* Update the path as needed */
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-left: 5%; /* Adjust the padding to align the form to the left */
+}
+
+.login-form-container {
+  width: auto; /* Adjust the width as needed or set to auto */
+  padding: 2rem;
+  color: #fff;
+}
+
+.login-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32.44px;
+  color: #B2F042;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 6.157px;
+}
+
+.welcome-back {
+  margin-bottom: 2rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 20.25px;
+  font-weight: 600;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Set the width of the form */
+}
+
+.input-container {
+  margin-bottom: 1rem;
+}
+
+.input-container input,
+.input-container select {
+  width: 100%; /* Full width of the parent container */
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  font-family: 'Manrope', sans-serif;
+}
+
+.input-container label {
+  display: block; /* Make the label a block element */
+  margin-bottom: 5px; /* Add space between the label and the input */
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.sign-in-button {
+    background: #B2F042;
+    color: #101010;
+    padding: 12px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    display: flex;
+    height: 60px;
+}

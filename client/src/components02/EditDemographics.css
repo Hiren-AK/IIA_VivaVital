@@ -1,0 +1,11 @@
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px; /* Adjust as needed */
+  }
+
+  .form-actions button {
+    padding: 10px 20px; /* Adjust as needed */
+    margin: 0 5px; /* Adjust as needed */
+    cursor: pointer;
+  }

@@ -9,19 +9,28 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Link } from 'react-router-dom';
 import MetricCard from './MetricCard';
 
-const formatNumber = (num) => {
-  return num ? parseFloat(num).toFixed(2).toLocaleString() : '0';
-};
+
+
+
 
 
 
 const Home = () => {
   const { user } = useContext(UserContext);
   const [metrics, setMetrics] = useState(null);
+  const navigate = useNavigate();
 
   const [bmi, setBmi] = useState(null);
   const [idealWeight, setIdealWeight] = useState(null);
   const [macros, setMacros] = useState(null);
+
+  const handleRecipies = () => {
+    navigate('/recipes'); // Make sure the route is correct as per your routing setup
+  };
+
+  const handleEditDemographics = () => {
+    navigate('/editdemographics'); // Make sure the route is correct as per your routing setup
+  }
 
   useEffect(() => {
     async function fetchMacros() {
@@ -143,15 +152,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div>Waiting for data...</div>
-      )}
-      <Link to="/recipes">
-        <button>Search Recipes</button>
-      </Link>
-      <Link to="/editdemographics">
-        <button>Edit Demographic</button>
-      </Link>
+        <button type="button" onClick={handleRecipies}>Search Recipies</button>
+        <button type="button" onClick={handleEditDemographics}>Edit Demographics</button>
+      
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import axios from 'axios';
+import './demographics.css'
 
 function DemographicsForm() {
     const { user } = useContext(UserContext);
@@ -43,42 +44,56 @@ function DemographicsForm() {
     };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Birthdate:
-        <input type="date" name="birthdate" value={demographics.birthdate} onChange={handleChange} required />
-      </label>
-      <label>
-        Gender:
-        <select name="gender" value={demographics.gender} onChange={handleChange} required>
-          <option value="">Select...</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </label>
-      <label>
-        Weight (kg):
-        <input type="number" name="weight" value={demographics.weight} onChange={handleChange} required />
-      </label>
-      <label>
-        Height (cm):
-        <input type="number" name="height" value={demographics.height} onChange={handleChange} required />
-      </label>
-      <label>
-        Activity Level:
-        <select name="activityLevel" value={demographics.activityLevel} onChange={handleChange} required>
-            <option value="">Select...</option>
-            <option value="level_1">Sedentary: little or no exercise</option>
-            <option value="level_2">Exercise 1-3 times/week</option>
-            <option value="level_3">Exercise 4-5 times/week</option>
-            <option value="level_4">Daily exercise or intense exercise 3-4 times/week</option>
-            <option value="level_5">Intense exercise 6-7 times/week</option>
-            <option value="level_6">Very intense exercise daily, or physical job</option>
-        </select>
-      </label>
-      <label>
-          Goal:
-          <select name="goal" value={demographics.goal} onChange={handleChange} required>
+    <div className="login-container">
+      <div className="login-form-container">
+        <h1 className="login-title">VIVAVITAL</h1>
+        <p className="welcome-back">Tell us about yourself!</p>
+        <form onSubmit={handleSubmit} className='login-form'>
+          <div className="input-container">
+          <label>Birthdate</label> <br/>
+          <input type="date" name="birthdate" value={demographics.birthdate} onChange={handleChange} required />
+      
+          </div>
+
+          <div className="input-container">
+          <label>Gender</label> <br/>
+            <select name="gender" value={demographics.gender} onChange={handleChange} required>
+              <option value="">Select...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+      
+          </div>
+
+          <div className="input-container">
+          <label>Weight (kg):</label> <br/>
+            <input type="number" name="weight" value={demographics.weight} onChange={handleChange} required />
+            
+          </div>
+
+          <div className="input-container">
+          <label>Height (cm):</label> <br/>
+            <input type="number" name="height" value={demographics.height} onChange={handleChange} required />
+            
+          </div>
+        
+          <div className="input-container">
+          <label>Activity Level</label> <br/>
+            <select name="activityLevel" value={demographics.activityLevel} onChange={handleChange} required>
+              <option value="">Select...</option>
+              <option value="level_1">Sedentary: little or no exercise</option>
+              <option value="level_2">Exercise 1-3 times/week</option>
+              <option value="level_3">Exercise 4-5 times/week</option>
+              <option value="level_4">Daily exercise or intense exercise 3-4 times/week</option>
+              <option value="level_5">Intense exercise 6-7 times/week</option>
+              <option value="level_6">Very intense exercise daily, or physical job</option>
+            </select>
+            
+          </div>
+
+          <div className="input-container">
+          <label>Goal</label><br/>
+            <select name="goal" value={demographics.goal} onChange={handleChange} required>
               <option value="">Select...</option>
               <option value="maintain">Maintain weight</option>
               <option value="mildlose">Mild weight loss</option>
@@ -87,10 +102,25 @@ function DemographicsForm() {
               <option value="mildgain">Mild weight gain</option>
               <option value="weightgain">Weight gain</option>
               <option value="extremegain">Extreme weight gain</option>
-          </select>
-      </label>
+            </select>
+            
+          </div>
+
       <button type="submit">Submit</button>
+
     </form>
+
+
+  </div>
+  
+</div>
+
+
+
+
+
+
+    
   );
 }
 

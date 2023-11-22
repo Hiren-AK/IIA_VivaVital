@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import axios from 'axios';
+import './EditDemographics.css'
+
 
 function EditDemographics() {
     const { user } = useContext(UserContext);
@@ -23,6 +25,10 @@ function EditDemographics() {
   
     const handleChange = (e) => {
       setDemographics({ ...demographics, [e.target.name]: e.target.value });
+    };
+
+    const handleCancel = () => {
+      navigate('/Home'); // Make sure the route is correct as per your routing setup
     };
   
     const handleSubmit = async (e) => {
@@ -91,6 +97,7 @@ function EditDemographics() {
           </select>
       </label>
       <button type="submit" color='000'>Submit</button>
+      <button type="button" onClick={handleCancel}>Cancel</button>
     </form>
   );
 }
