@@ -2,6 +2,11 @@ import React from 'react';
 import UserInputForm from '../components01/UserInputForm';
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleRecipeSearch = () => {
+    navigate('/recipes');
+  }
   return (
     <div>
       <h1>VivaVital Health Metrics Dashboard</h1>
@@ -24,7 +29,11 @@ function Home() {
       ) : (
         <div>Waiting for data...</div>
       )}
-    </div>
+      <button onClick={handleRecipeSearch}>
+        Search Recipes
+      </button>
+
+    </div>    
   );
 };
 
