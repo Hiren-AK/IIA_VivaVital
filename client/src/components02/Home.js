@@ -16,6 +16,7 @@ import MetricCard from './MetricCard';
 
 
 const Home = () => {
+  
   const { user } = useContext(UserContext);
   const [metrics, setMetrics] = useState(null);
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Home = () => {
   const [macros, setMacros] = useState(null);
 
   const handleRecipies = () => {
+    localStorage.setItem('metrics', JSON.stringify(metrics));
     navigate('/recipes'); // Make sure the route is correct as per your routing setup
   };
 
@@ -32,7 +34,7 @@ const Home = () => {
     navigate('/editdemographics'); // Make sure the route is correct as per your routing setup
   }
 
-  useEffect(() => {
+  useEffect(() => { 
     async function fetchMacros() {
       try {
         const result = await calculateMacros(user.user);
@@ -67,6 +69,8 @@ const Home = () => {
     fetchIdealWeight();
   }, [user.user]);
   useEffect(() => {
+
+    
     // Initialize WebSocket connection
     const ws = new WebSocket('ws://192.168.46.232:8001');
 
@@ -80,6 +84,8 @@ const Home = () => {
         const data = JSON.parse(event.data);
         console.log('Data received:', data);
         setMetrics(data);
+        localStorage.setItem('metrics', JSON.stringify(data));
+        console.log('locally saved metrics:', localStorage.getItem('metrics'));
       } catch (error) {
         console.error('Error parsing message:', error);
         // Handle any non-JSON messages or other actions here
@@ -98,6 +104,7 @@ const Home = () => {
     // Clean up the WebSocket connection when the component unmounts
     return () => {
       ws.close();
+      localStorage.removeItem('metrics');
     };
   }, []);
 
