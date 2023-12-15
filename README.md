@@ -28,6 +28,7 @@ Follow these steps to set up the project locally.
 2. **Set Up the Server**
 
     Navigate to the server directory, install dependencies, and start the server:
+   (Remember to edit the final.env file to add your SQL password to the [password] section)
 
     ```sh
     cd server
@@ -35,7 +36,7 @@ Follow these steps to set up the project locally.
     npm start
     ```
 
-3. **Set Up the Client**
+4. **Set Up the Client**
 
     Open a new terminal, navigate to the client directory, install dependencies, and start the React application:
 
@@ -47,7 +48,7 @@ Follow these steps to set up the project locally.
 
     The application should now be running on `http://localhost:8001`.
 
-4. **Configure MySQL Database**
+5. **Configure MySQL Database**
 
     Update the database configuration in the server application (final.env) according to your mysql local, make a database and put the name of it in place of VivaVital in the file.
     Ensure you have the required libraries installed (pymysql, pandas, openpyxl) and replace "your_password" with your actual MySQL root password.
